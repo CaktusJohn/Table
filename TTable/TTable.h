@@ -19,6 +19,12 @@ struct TRecord
 			return true;
 		else return false;
 	}
+	bool operator== (const TRecord& rec)
+	{
+		if (key == rec.key && val == rec.val)
+			return true;
+		else return false;
+	}
 };
 
 class TTable

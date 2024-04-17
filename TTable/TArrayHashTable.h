@@ -48,8 +48,41 @@ public:
 	bool Find(Tkey key)
 	{
 		Free = -1;
-		Curr = HashFunc(Tkey key) % MaxSize;
-
+		Curr = HashFunc(key) % MaxSize;
+		for (int t = 0; t < MaxSize; t++)
+		{
+			eff++;
+			if (pRecs[Curr].key == key)
+				return true;
+			if (pRecs[Curr] == Del && Free == -1)
+			{
+				Free == Curr;
+			}
+			if (pRecs[Curr] == Empty)
+			{
+				return false;
+			}
+			Curr = (Curr + Step) % MaxSize;
+		}
+		return false;
+	}
+	void insert(const TRecord& rec)
+	{
+		if (Full())
+		{
+			return;
+		}
+		bool isFind = Find(rec.key);
+		if (isFind)
+		{
+			return;
+		}
+		else
+		{
+			if (Free != -1)
+				pRecs[Curr] = rec;
+			DataCount++;
+		}
 	}
 };
 
