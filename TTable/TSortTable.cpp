@@ -103,4 +103,13 @@ void TSortTable::sort_select( int size)
         swap(pRecs[i], pRecs[pos]); 
     }
 }
-
+ostream& operator<<(ostream& os, TSortTable t)
+{
+    t.Reset();
+    while (!t.IsEnd())
+    {
+        os << t.getRecord() << endl;
+        t.GoNext();
+    }
+    return os;
+}

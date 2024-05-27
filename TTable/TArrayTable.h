@@ -15,7 +15,7 @@ public:
 	}
 	~TArrayTable()
 	{
-		delete pRecs;
+		delete[] pRecs;
 	}
 	TArrayTable(const TArrayTable& tab)
 	{
@@ -26,6 +26,7 @@ public:
 			pRecs[i] = tab.pRecs[i];
 		}
 		CurrPos = tab.CurrPos;
+		DataCount = tab.DataCount;
 	}
 	TArrayTable& operator= (const TArrayTable& tab)
 	{
@@ -50,7 +51,7 @@ int GetTabSize()
 }
 virtual TRecord getRecord()
 {
-	if (CurrPos > 0 && CurrPos < TabSize)
+	if (CurrPos >= 0 && CurrPos < TabSize)
 		return pRecs[CurrPos];
 	else throw ("current element is wrong");
 }
@@ -62,7 +63,7 @@ virtual void Reset() // установить на первую запись
 }
 virtual bool IsEnd()
 {
-	return CurrPos >= DataCount;
+	return (CurrPos == DataCount);
 }
 virtual void GoNext()
 {

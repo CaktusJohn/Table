@@ -7,6 +7,6 @@ public:
 	virtual bool Find(Tkey key);
 	virtual void InsRec(TRecord rec);
 	virtual void DelRec(Tkey key);
-
+	friend ostream& operator<<(ostream& os, TScanTable t);
 };
 

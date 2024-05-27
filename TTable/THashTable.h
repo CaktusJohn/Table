@@ -3,6 +3,6 @@
 class THashTable:public TTable
 {
 protected:
-	virtual int HashFunc(Tkey key);
+	virtual int HashFunc(Tkey key)=0;
 };
 

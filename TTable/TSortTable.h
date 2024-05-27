@@ -19,8 +19,8 @@ public:
 	{
 		enum Sort{Quiq=1,Merge,Select};
 		int a;
-		cin >> a;	
 		cout << "¬ыберите тип сортировки: 1-быстра€ 2-сли€нием 3-вставкой\n";
+		cin >> a;	
 		switch (a)
 		{
 		case (Quiq):
@@ -83,4 +83,5 @@ public:
 			DataCount++;
 		}
 	}*/
+	friend ostream& operator<<(ostream& os, TSortTable t);
 };

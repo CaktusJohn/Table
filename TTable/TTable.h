@@ -52,14 +52,7 @@ public:
 			return true;
 		else return false;
 	}
-	friend ostream& operator<<(ostream& os, TTable t)
-	{
-		for (t.Reset(); !t.IsEnd(); t.GoNext())
-		{
-			os << t.getRecord() << endl;
-		}
-		return os;
-	}
+	
 	virtual bool Full() = 0;
 	virtual bool Find(Tkey key) = 0;
 	virtual void InsRec(TRecord rec) = 0;
@@ -68,6 +61,5 @@ public:
 	virtual void GoNext() = 0;
 	virtual bool IsEnd() = 0;
 	virtual TRecord getRecord() = 0;
-	
 };
-
+ 

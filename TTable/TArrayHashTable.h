@@ -7,6 +7,10 @@ protected:
 	int MaxSize, Step, Curr, Free;
 	TRecord Empty, Del;
 public:
+	virtual int HashFunc(Tkey key) override
+	{
+		return key + 10;
+	}
 	TArrayHashTable(int _MaxSize,int _Step)	
 	{
 		Step = _Step;
@@ -66,7 +70,18 @@ public:
 		}
 		return false;
 	}
-	void insert(const TRecord& rec)
+	void DelRec(Tkey key)
+	{
+		bool b=Find(key);
+		if (b)
+		{
+			pRecs[Curr] = Del;
+			DataCount--;
+		}
+	
+
+	}
+	void InsRec( TRecord rec)
 	{
 		if (Full())
 		{
@@ -84,5 +99,16 @@ public:
 			DataCount++;
 		}
 	}
+	virtual TRecord getRecord() override
+	{
+		if (Curr > 0 && Curr < MaxSize)
+			return pRecs[Curr];
+		else throw ("current element is wrong");
+	}
+	virtual bool Full() override
+	{
+		return (DataCount >= MaxSize);
+	}
+	
 };
 

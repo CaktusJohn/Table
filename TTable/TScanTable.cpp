@@ -19,6 +19,12 @@ void TScanTable::InsRec(TRecord rec)
 }
 bool TScanTable::Find(Tkey key)
 {
+	if (DataCount == 0)
+	{
+		CurrPos = 0;
+		return false;
+
+	}
 	for (int i = 0; i < DataCount; i++)
 	{
 
@@ -32,4 +38,14 @@ bool TScanTable::Find(Tkey key)
 	}
 
 	return false;
+}
+ostream& operator<<(ostream& os, TScanTable t)
+{
+	t.Reset();
+	while(!t.IsEnd())
+	{
+		os << t.getRecord() << endl;
+		t.GoNext();
+	}
+	return os;
 }
