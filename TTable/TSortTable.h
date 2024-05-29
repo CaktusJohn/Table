@@ -24,7 +24,7 @@ public:
 		switch (a)
 		{
 		case (Quiq):
-			QuickTableSort();
+			Qsort(0,DataCount-1);
 			break;
 		case (Merge):
 			MergeTableSort();
@@ -56,17 +56,25 @@ public:
 	bool Find(Tkey key);
 	void InsRec(TRecord rec)
 	{
-		bool res = Find(rec.key);
-		if (!res)
+		if (Full())
 		{
-			for (int i = CurrPos; i < DataCount; i++)
+			cout << "table is full";
+		}
+		else
+		{
+			bool res = Find(rec.key);
+			if (!res)
 			{
-				eff++;
-				if (i > TabSize) throw("no spase");
-				pRecs[i + 1] = pRecs[i];
+				for (int i = DataCount - 1; i >= CurrPos; i--)
+				{
+
+					eff++;
+					pRecs[i + 1] = pRecs[i];
+
+				}
+				pRecs[CurrPos] = rec;
+				DataCount++;
 			}
-			pRecs[CurrPos] = rec;
-			DataCount++;
 		}
 	}
 	/*void DelRec(Tkey key)

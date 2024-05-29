@@ -19,12 +19,6 @@ void TScanTable::InsRec(TRecord rec)
 }
 bool TScanTable::Find(Tkey key)
 {
-	if (DataCount == 0)
-	{
-		CurrPos = 0;
-		return false;
-
-	}
 	for (int i = 0; i < DataCount; i++)
 	{
 
@@ -34,13 +28,13 @@ bool TScanTable::Find(Tkey key)
 			CurrPos = i;
 			return true;
 		}
-		CurrPos = i;
 	}
-
+	CurrPos = DataCount;
 	return false;
 }
 ostream& operator<<(ostream& os, TScanTable t)
 {
+	cout << setw(10) << "Ключ" << setw(12) << "Значение\n";
 	t.Reset();
 	while(!t.IsEnd())
 	{

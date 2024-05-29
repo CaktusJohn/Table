@@ -1,5 +1,6 @@
 #pragma once
 #include<iostream>
+#include<iomanip>
 using namespace std;
 
 typedef int Tkey;
@@ -10,7 +11,7 @@ struct TRecord
 	Tval val;
 	friend ostream& operator<<(ostream& os,TRecord record)
 	{
-		os << record.key << " " << record.val << endl;
+		os<<setw(10) << record.key<< setw(10)<< record.val << endl;
 		return os;
 	}
 	bool operator!= (const TRecord& rec)

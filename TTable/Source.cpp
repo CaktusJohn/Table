@@ -8,20 +8,17 @@
 #include<string>
 int main()
 {
-	int a; int size;
+	int a=30,b; int size;
 	setlocale(LC_CTYPE, "Russian");
 	mt19937 gen(static_cast<unsigned int>(time(nullptr)));
 	uniform_int_distribution<> distrib(1, 1000);
 
 	enum Table{Scantab = 1, SortTab, ArrayHash, ListHash, RBTree,AvlTree };
-	cout << "Выберите тип таблицы:\n 1-неупорядоченная\n 2-упорядоченная\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-АВЛ дерево\n";
-	
-	cin>>a;
-	while (a != 0)
+	while(a!=0)
 	{
-
-
-		switch (a)
+	cout << "Выберите тип таблицы:\n 1-неупорядоченная\n 2-упорядоченная\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-АВЛ дерево\n";
+	cin>>a;
+	switch (a)
 		{
 		case (Scantab):
 		{
@@ -35,9 +32,25 @@ int main()
 				rec.key = rand;
 				rec.val = to_string(rand) + "**";
 				t.InsRec(rec);
-				cout << t.getRecord();
 			}
-			//cout << t;
+			cout << t;
+			cout << "1-поиск элемента\n2-добавление элемента\n3-удаление элемента\n";
+			cin >> b;
+			switch (b)
+			{
+			case 1:
+			{
+				int el;
+				cout << "Введите элемент\n";
+				cin >> el;
+				if (t.Find(el))
+					cout << "Такой элемент есть";
+				else
+					cout << "Такого элемента нет";
+			}break;
+			default:
+				break;
+			}
 			break;
 
 		}
@@ -53,16 +66,8 @@ int main()
 				rec.key = rand;
 				rec.val = to_string(rand) + "**";
 				t.InsRec(rec);
-				cout << t.getRecord();
-
 			}
-			t.Sort();
-			t.Reset();
-			while (!t.IsEnd())
-			{
-				cout << t.getRecord() << endl;
-				t.GoNext();
-			}
+			cout << t;
 			break;
 		}
 		case (ArrayHash):

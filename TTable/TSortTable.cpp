@@ -21,29 +21,34 @@ bool TSortTable::Find(Tkey key)
 }
 void TSortTable::Qsort(int l, int r)
 {
+    if (l >= r) // Базовый случай для выхода из рекурсии
+        return;
+
 	int m = (l + r) / 2;
 	Tkey key = pRecs[m].key;
+    
 	int i = l, j = r;
-	while (i < j)
-	{
-		while (pRecs[i].key < key)
-		{
-			i++; eff++;
-		}
-		while (pRecs[j].key > key)
-		{
-			j--;
-			eff++;
-		}
-		if (i <= j)
-		{
-			swap(pRecs[i], pRecs[j]);
-			i++; j--; eff++;
-		}
+    while (i < j)
+    {
+        while (pRecs[i].key < key)
+        {
+            i++; eff++;
+        }
+        while (pRecs[j].key > key)
+        {
+            j--;
+            eff++;
+        }
+        if (i <= j)
+        {
+            swap(pRecs[i], pRecs[j]);
+            i++; j--; eff++;
+        }
+    }
 		if (j > l) Qsort(l, j);
 		if (i < r) Qsort(i, r);
-	}
 }
+
 void TSortTable::merge( int left, int mid, int right)//слиянием
 {
     int i = left;
@@ -105,6 +110,7 @@ void TSortTable::sort_select( int size)
 }
 ostream& operator<<(ostream& os, TSortTable t)
 {
+    cout << setw(10) << "Ключ" << setw(12) << "Значение\n";
     t.Reset();
     while (!t.IsEnd())
     {

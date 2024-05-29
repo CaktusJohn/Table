@@ -49,7 +49,7 @@ int GetTabSize()
 {
 	return TabSize;
 }
-virtual TRecord getRecord()
+virtual TRecord getRecord () override
 {
 	if (CurrPos >= 0 && CurrPos < TabSize)
 		return pRecs[CurrPos];
@@ -57,15 +57,15 @@ virtual TRecord getRecord()
 }
 
 
-virtual void Reset() // установить на первую запись
+virtual void Reset() override // установить на первую запись
 {
 	CurrPos = 0;
 }
-virtual bool IsEnd()
+virtual bool IsEnd() override
 {
 	return (CurrPos == DataCount);
 }
-virtual void GoNext()
+virtual void GoNext() override
 {
 	CurrPos++;
 }
