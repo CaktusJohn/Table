@@ -9,14 +9,13 @@ public:
 	{
 		pBuff = new TRecord[_size];
 	}
-	TSortTable(const TScanTable& st)
+	void ScanToSort(TScanTable& tab)
 	{
-		*this= st;
-		Sort();
-	}
-
-	void Sort()
-	{
+		for (tab.Reset(), Reset(); !tab.IsEnd(); tab.GoNext(), GoNext())
+		{
+			pRecs[CurrPos] = tab.getRecord();
+			DataCount++;
+		}
 		enum Sort{Quiq=1,Merge,Select};
 		int a;
 		cout << "¬ыберите тип сортировки: 1-быстра€ 2-сли€нием 3-вставкой\n";
@@ -25,12 +24,18 @@ public:
 		{
 		case (Quiq):
 			Qsort(0,DataCount-1);
+			cout << *this;
+			cout << "Ёффективность: " << getEff() << endl << endl;;
 			break;
 		case (Merge):
-			MergeTableSort();
+			merge_sort(0, DataCount - 1);
+			cout << *this;
+			cout << "Ёффективность: " << getEff() << endl << endl;;
 			break;
 		case (Select):
-			TableSelectSort();
+			sort_select(DataCount);
+			cout << *this;
+			cout << "Ёффективность: " << getEff() << endl << endl;;
 			break;
 		default:
 			cout << "error\n";
@@ -56,6 +61,7 @@ public:
 	bool Find(Tkey key);
 	void InsRec(TRecord rec)
 	{
+		eff = 0;
 		if (Full())
 		{
 			cout << "table is full";
@@ -77,8 +83,9 @@ public:
 			}
 		}
 	}
-	/*void DelRec(Tkey key)
+	void DelRec(Tkey key)
 	{
+		eff = 0;
 		bool res = Find(key);
 		if (res)
 		{
@@ -87,9 +94,8 @@ public:
 				eff++;
 				pRecs[i] = pRecs[i+1];
 			}
-			pRecs[CurrPos] = rec;
-			DataCount++;
+			DataCount--;
 		}
-	}*/
+	}
 	friend ostream& operator<<(ostream& os, TSortTable t);
 };

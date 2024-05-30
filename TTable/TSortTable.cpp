@@ -1,6 +1,7 @@
 #include "TSortTable.h"
 bool TSortTable::Find(Tkey key)
 {
+    eff = 0;
 	int l = 0, r = DataCount - 1;
 	while (l <= r)
 	{
@@ -51,6 +52,7 @@ void TSortTable::Qsort(int l, int r)
 
 void TSortTable::merge( int left, int mid, int right)//слиянием
 {
+    
     int i = left;
     int j = mid + 1;
     int k = left;
@@ -59,32 +61,33 @@ void TSortTable::merge( int left, int mid, int right)//слиянием
         if (pRecs[i].key < pRecs[j].key)
         {
             pBuff[k] = pRecs[i]; 
-            k++; i++;
+            k++; i++; eff++;
         }
         else
         {
             pBuff[k]= pRecs[j]; 
-            k++; j++;
+            k++; j++; eff++;
         }
     }
     if (i > mid)
         while (j <= right)
         {
             pBuff[k] = pRecs[j]; 
-            j++; k++;
+            j++; k++; eff++;
         }
     else
         while (i <= mid)
         {
-            pBuff[k] = pRecs[i]; 
+            pBuff[k] = pRecs[i]; i++; k++; eff++;
         }
     for (i = left; i <= right; i++)
     {
-        pRecs[i] = pBuff[i];
+        pRecs[i] = pBuff[i]; eff++;
     }
 }
 void TSortTable::merge_sort ( int left, int right)
 {
+    eff = 0;
     if (left == right) return;
     int mid = (left + right) / 2;
     merge_sort( left, mid);
@@ -93,12 +96,13 @@ void TSortTable::merge_sort ( int left, int right)
 }
 void TSortTable::sort_select( int size)
 {
-    int i, j, pos, mini;
+    int i, j, pos, mini; eff = 0;
     for (i = 0; i < size; i++)
     {
         mini = pRecs[i].key; pos = i;
         for (j = i + 1; j < size; j++)           
-        {
+        { 
+            eff++;
             if (pRecs[j].key < mini)
             {
                 mini = pRecs[j].key;

@@ -8,17 +8,17 @@
 #include<string>
 int main()
 {
-	int a=30,b; int size;
+	int a = 30, b = 30; int size;
 	setlocale(LC_CTYPE, "Russian");
 	mt19937 gen(static_cast<unsigned int>(time(nullptr)));
 	uniform_int_distribution<> distrib(1, 1000);
 
-	enum Table{Scantab = 1, SortTab, ArrayHash, ListHash, RBTree,AvlTree };
-	while(a!=0)
+	enum Table { Scantab = 1, SortTab, ArrayHash, ListHash, RBTree, AvlTree };
+	while (a != 0)
 	{
-	cout << "Выберите тип таблицы:\n 1-неупорядоченная\n 2-упорядоченная\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-АВЛ дерево\n";
-	cin>>a;
-	switch (a)
+		cout << "Выберите тип таблицы:\n 1-неупорядоченная\n 2-упорядоченная\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-АВЛ дерево\n 0-выход\n";
+		cin >> a;
+		switch (a)
 		{
 		case (Scantab):
 		{
@@ -34,22 +34,51 @@ int main()
 				t.InsRec(rec);
 			}
 			cout << t;
-			cout << "1-поиск элемента\n2-добавление элемента\n3-удаление элемента\n";
-			cin >> b;
-			switch (b)
+			cout << "Эффективность: " << t.getEff() << endl << endl;
+			b = 30;
+			while (b != 0)
 			{
-			case 1:
-			{
-				int el;
-				cout << "Введите элемент\n";
-				cin >> el;
-				if (t.Find(el))
-					cout << "Такой элемент есть";
-				else
-					cout << "Такого элемента нет";
-			}break;
-			default:
-				break;
+				cout << "1-поиск элемента\n2-добавление элемента\n3-удаление элемента\n0-выход\n";
+				cin >> b;
+				switch (b)
+				{
+				case 1:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					if (t.Find(el))
+						cout << "Такой элемент есть\n";
+					else
+						cout << "Такого элемента нет\n";
+					cout << "Эффективность: " << t.getEff() << endl << endl;
+				}break;
+				case 2:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					TRecord rec;
+					rec.key = el;
+					rec.val = to_string(el) + "**";
+					t.InsRec(rec);
+					cout << "Эффективность: " << t.getEff() << endl << endl;
+					break;
+				}
+				case 3:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					t.DelRec(el);
+					cout << "Эффективность: " << t.getEff() << endl << endl;;
+					break;
+				}
+
+
+				default:
+					break;
+				}
 			}
 			break;
 
@@ -58,7 +87,7 @@ int main()
 		{
 			cout << "Введите количество записей\n";
 			cin >> size;
-			TSortTable t(size);
+			TScanTable t(size);
 			TRecord rec;
 			while (!t.Full())
 			{
@@ -68,15 +97,68 @@ int main()
 				t.InsRec(rec);
 			}
 			cout << t;
-			break;
-		}
+			TSortTable sort(size);
+			sort.ScanToSort(t);
+			b = 30;
+			while (b != 0)
+			{
+				cout << "1-поиск элемента\n2-добавление элемента\n3-удаление элемента\n0-выход\n";
+				cin >> b;
+				switch (b)
+				{
+				case 1:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					if (t.Find(el))
+						cout << "Такой элемент есть\n";
+					else
+						cout << "Такого элемента нет\n";
+					cout << "Эффективность: " << t.getEff() << endl << endl;
+					break;
+				}
+
+				case 2:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					TRecord rec;
+					rec.key = el;
+					rec.val = to_string(el) + "**";
+					t.InsRec(rec);
+					cout << "Эффективность: " << t.getEff() << endl << endl;
+					break;
+				}
+				case 3:
+				{
+					int el;
+					cout << "Введите элемент\n";
+					cin >> el;
+					t.DelRec(el);
+					cout << "Эффективность: " << t.getEff() << endl << endl;;
+					break;
+				}
+
+
+				default:
+					break;
+				}
+			}
+				break;
+			}
+
 		case (ArrayHash):
 		{
 			TArrayHashTable t(5, 1);
 			break;
 		}
 
+		default:
+			break;
+
 		}
 
+		}
 	}
-}

@@ -1,6 +1,7 @@
 #include "TScanTable.h"
 void TScanTable::DelRec(Tkey key)
 {
+	eff = 0;
 	if (Find(key))
 	{
 		pRecs[CurrPos] = pRecs[DataCount - 1];
@@ -11,14 +12,19 @@ void TScanTable::DelRec(Tkey key)
 }
 void TScanTable::InsRec(TRecord rec)
 {
+	eff = 0;
 	if (Full()) throw("table is full");
-	Find(rec.key);
-	pRecs[CurrPos] = rec;
-	DataCount++;
-	eff++;
+	if (Find(rec.key))
+		cout << "Такой элемент уже есть\n";
+	else {
+		pRecs[CurrPos] = rec;
+		DataCount++;
+		eff++;
+	}
 }
 bool TScanTable::Find(Tkey key)
 {
+	eff = 0;
 	for (int i = 0; i < DataCount; i++)
 	{
 
