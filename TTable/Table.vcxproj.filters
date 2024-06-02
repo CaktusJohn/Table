@@ -36,6 +36,12 @@
     <ClInclude Include="TListHash.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="TAVLTree.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="TTreeTable.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="TTable.cpp">

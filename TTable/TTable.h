@@ -5,6 +5,9 @@ using namespace std;
 
 typedef int Tkey;
 typedef string Tval;
+
+constexpr size_t MAX_SIZE = 999;
+
 struct TRecord
 {
 	Tkey key;
