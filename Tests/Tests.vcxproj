@@ -131,8 +131,10 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gtest-all.cc" />
+    <ClCompile Include="test_TsortTable.cpp" />
+    <ClCompile Include="test_TArrayHashTable.cpp" />
     <ClCompile Include="test_main.cpp" />
-    <ClCompile Include="test_stack.cpp" />
+    <ClCompile Include="test_TscanTabele.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

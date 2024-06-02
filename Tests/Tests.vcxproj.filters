@@ -26,7 +26,13 @@
     <ClCompile Include="test_main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="test_stack.cpp">
+    <ClCompile Include="test_TscanTabele.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_TsortTable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="test_TArrayHashTable.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

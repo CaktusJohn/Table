@@ -25,13 +25,15 @@ public:
 			pRecs[i] = Empty;
 		}
 	}
-	~TArrayHashTable()
+	/*~TArrayHashTable()
 	{
-		delete pRecs;
-	}
+		delete[] pRecs;
+		
+	}*/
 	void Reset()
 	{
-		for (Curr = 0; Curr < MaxSize; Curr++)
+		Curr = 0;
+		for (; Curr < MaxSize; Curr++)
 		{
 			if (pRecs[Curr] != Empty && pRecs[Curr] != Del)
 				break;
@@ -40,10 +42,11 @@ public:
 	bool IsEnd()
 	{
 		if (Curr == MaxSize) return true;
+		else return false;
 	}
 	void GoNext()
 	{
-		for (; Curr < MaxSize; Curr++)
+		for (Curr++; Curr < MaxSize; Curr++)
 		{
 			if (pRecs[Curr] != Empty && pRecs[Curr] != Del)
 				break;
@@ -60,7 +63,7 @@ public:
 				return true;
 			if (pRecs[Curr] == Del && Free == -1)
 			{
-				Free == Curr;
+				Free = Curr;
 			}
 			if (pRecs[Curr] == Empty)
 			{
@@ -90,18 +93,22 @@ public:
 		bool isFind = Find(rec.key);
 		if (isFind)
 		{
+			cout << "Такой элемент уже есть";
 			return;
 		}
 		else
 		{
 			if (Free != -1)
+			{
+				Curr = Free;
+			}
 				pRecs[Curr] = rec;
 			DataCount++;
 		}
 	}
 	virtual TRecord getRecord() override
 	{
-		if (Curr > 0 && Curr < MaxSize)
+		if (Curr >= 0 && Curr < MaxSize)
 			return pRecs[Curr];
 		else throw ("current element is wrong");
 	}
@@ -109,6 +116,7 @@ public:
 	{
 		return (DataCount >= MaxSize);
 	}
+	friend ostream& operator<<(ostream& os, TArrayHashTable t);
 	
 };
 

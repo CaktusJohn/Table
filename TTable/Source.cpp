@@ -6,9 +6,10 @@
 #include<random>
 #include<ctime>
 #include<string>
+
 int main()
 {
-	int a = 30, b = 30; int size;
+	int a = 30, b = 30; int size,step;
 	setlocale(LC_CTYPE, "Russian");
 	mt19937 gen(static_cast<unsigned int>(time(nullptr)));
 	uniform_int_distribution<> distrib(1, 1000);
@@ -137,7 +138,7 @@ int main()
 					cout << "¬ведите элемент\n";
 					cin >> el;
 					t.DelRec(el);
-					cout << "Ёффективность: " << t.getEff() << endl << endl;;
+					cout << "Ёффективность: " << t.getEff() << endl << endl;
 					break;
 				}
 
@@ -151,7 +152,22 @@ int main()
 
 		case (ArrayHash):
 		{
-			TArrayHashTable t(5, 1);
+			cout << "¬ведите количество записей\n";
+			cin >> size;
+			cout << "¬ведите шаг хешировани€\n";
+			cin >> step;
+			TArrayHashTable t(size, step);
+			TRecord rec;
+			while (!t.Full())
+			{
+				int rand = distrib(gen);
+				rec.key = rand;
+				rec.val = to_string(rand) + "**";
+				t.InsRec(rec);
+			}
+			cout << t;
+			cout << "Ёффективность: " << t.getEff() << endl << endl;
+			
 			break;
 		}
 
