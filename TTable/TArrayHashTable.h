@@ -93,7 +93,7 @@ public:
 		bool isFind = Find(rec.key);
 		if (isFind)
 		{
-			cout << "Такой элемент уже есть";
+			cout << "Такой элемент уже есть\n";
 			return;
 		}
 		else

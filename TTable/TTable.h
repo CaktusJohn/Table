@@ -34,6 +34,10 @@ protected:
 	int DataCount;
 	int eff;
 public:
+	void SetZeroEff()
+	{
+		eff = 0;
+	}
 	virtual ~TTable() {};
 	int getDataCount()
 	{

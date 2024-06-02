@@ -1,7 +1,6 @@
 #include "TSortTable.h"
 bool TSortTable::Find(Tkey key)
 {
-    eff = 0;
 	int l = 0, r = DataCount - 1;
 	while (l <= r)
 	{
@@ -87,7 +86,6 @@ void TSortTable::merge( int left, int mid, int right)//слиянием
 }
 void TSortTable::merge_sort ( int left, int right)
 {
-    eff = 0;
     if (left == right) return;
     int mid = (left + right) / 2;
     merge_sort( left, mid);
