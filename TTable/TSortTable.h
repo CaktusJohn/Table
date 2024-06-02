@@ -64,7 +64,7 @@ public:
 		eff = 0;
 		if (Full())
 		{
-			cout << "table is full";
+			throw("error");
 		}
 		else
 		{

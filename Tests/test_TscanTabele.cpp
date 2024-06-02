@@ -1,4 +1,5 @@
 #include "../TTable/TScanTable.h"
+#include "../TTable/TScanTable.cpp"
 #include "gtest.h"
 #include "string"
 #include<random>

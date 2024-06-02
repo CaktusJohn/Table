@@ -88,6 +88,7 @@ public:
 	{
 		if (Full())
 		{
+			throw ("error");
 			return;
 		}
 		bool isFind = Find(rec.key);
