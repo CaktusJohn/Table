@@ -267,8 +267,8 @@ public:
 		}
 	}
 
-	bool IsFull() const { return false; };
-	TRecord GetCurrentRecord() { return pCurr->rec; };
+	bool Full() { return false; };
+	TRecord getRecord() { return pCurr->rec; };
 	void SetCurrentRecord(TRecord record)
 	{
 		pCurr->rec.key = record.key;

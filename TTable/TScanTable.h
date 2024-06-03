@@ -5,8 +5,8 @@ class TScanTable : public TArrayTable
 public:
 	TScanTable (int Size=10) : TArrayTable(Size) {};
 	virtual bool Find(Tkey key);
-	virtual void InsRec(TRecord rec);
-	virtual void DelRec(Tkey key);
+	virtual bool Insert(TRecord rec);
+	virtual bool Delete(Tkey key);
 	friend ostream& operator<<(ostream& os, TScanTable t);
 };
 

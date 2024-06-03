@@ -73,29 +73,29 @@ public:
 		}
 		return false;
 	}
-	void DelRec(Tkey key)
+	bool Delete(Tkey key)
 	{
 		bool b=Find(key);
 		if (b)
 		{
 			pRecs[Curr] = Del;
 			DataCount--;
+			return true;
 		}
-	
-
+		else return false;
 	}
-	void InsRec( TRecord rec)
+	bool Insert( TRecord rec)
 	{
 		if (Full())
 		{
 			throw ("error");
-			return;
+			return false;
 		}
 		bool isFind = Find(rec.key);
 		if (isFind)
 		{
 			cout << "Такой элемент уже есть\n";
-			return;
+			return false;
 		}
 		else
 		{
@@ -105,6 +105,7 @@ public:
 			}
 				pRecs[Curr] = rec;
 			DataCount++;
+			return true;
 		}
 	}
 	virtual TRecord getRecord() override

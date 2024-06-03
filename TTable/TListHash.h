@@ -27,8 +27,10 @@ public:
 
 	~TListHash()
 	{
-		delete[] pList;
-		DataCount = 0;
+		if (getDataCount()) {
+			pList->clear();
+			DataCount = 0;
+		}
 	}
 
 	TListHash& operator =(const TListHash& other)
@@ -120,7 +122,7 @@ public:
 		}
 	}
 
-	bool Full() const
+	bool Full()
 	{
 		if (DataCount == size)
 			return true;
@@ -160,9 +162,22 @@ public:
 
 	}
 
-	TRecord GetCurrentRecord()
+	TRecord getRecord()
 	{
 		return *pCurr;
 	}
+
+	friend ostream& operator<<(ostream& os, TListHash t)
+	{
+		cout << setw(10) << "Ключ" << setw(12) << "Значение\n";
+		t.Reset();
+		while (!t.IsEnd())
+		{
+			os << t.getRecord() << endl;
+			t.GoNext();
+		}
+		return os;
+	}
+
 };
 

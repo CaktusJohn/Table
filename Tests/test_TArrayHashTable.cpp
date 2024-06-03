@@ -16,7 +16,7 @@ TEST(TArrayHashTable, can_insert)
     TRecord a;
     a.key = 1;
     a.val = str;
-    ASSERT_NO_THROW(table.InsRec(a));
+    ASSERT_NO_THROW(table.Insert(a));
     table.Find(1);
     EXPECT_TRUE(a == table.getRecord());
 }
@@ -32,9 +32,9 @@ TEST(TArrayHashTable, cant_insert_new_Record_in_Full_ArrayHashTable)
         int rand = distrib(gen);
         rec.key = rand;
         rec.val = to_string(rand) + "**";
-        t.InsRec(rec);
+        t.Insert(rec);
     }
-    ASSERT_ANY_THROW(t.InsRec(rec));
+    ASSERT_ANY_THROW(t.Insert(rec));
 
 }
 TEST(TArrayHashTable, can_delete)
@@ -43,7 +43,7 @@ TEST(TArrayHashTable, can_delete)
     TRecord rec;
     rec.key = 2;
     rec.val = "fs";
-    tab.InsRec(rec);
-    tab.DelRec(2);
+    tab.Insert(rec);
+    tab.Delete(2);
     EXPECT_EQ(tab.getRecord().key, -2);
 }

@@ -12,6 +12,19 @@ struct TRecord
 {
 	Tkey key;
 	Tval val;
+
+	TRecord()
+	{
+		key = 0;
+		val = "";
+	}
+
+	TRecord(Tkey key, Tval value)
+	{
+		this->key = key;
+		this->val = value;
+	}
+
 	friend ostream& operator<<(ostream& os,TRecord record)
 	{
 		os<<setw(10) << record.key<< setw(10)<< record.val << endl;
@@ -63,8 +76,8 @@ public:
 	
 	virtual bool Full() = 0;
 	virtual bool Find(Tkey key) = 0;
-	virtual void InsRec(TRecord rec) = 0;
-	virtual void DelRec(Tkey key) = 0;
+	virtual bool Insert(TRecord rec) = 0;
+	virtual bool Delete(Tkey key) = 0;
 	virtual void Reset() = 0;
 	virtual void GoNext() = 0;
 	virtual bool IsEnd() = 0;
