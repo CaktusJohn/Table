@@ -10,7 +10,7 @@
 #include<string>
 
 template <class T>
-void actions(T t)
+void actions(T& t)
 {
 	int b = -1;
 	while (b != 0)
@@ -43,6 +43,7 @@ void actions(T t)
 			rec.key = el;
 			rec.val = to_string(el) + "**";
 			t.Insert(rec);
+			cout << t;
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			break;
 		}
@@ -53,10 +54,10 @@ void actions(T t)
 			cout << "¬ведите элемент\n";
 			cin >> el;
 			t.Delete(el);
+			cout << t;
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			break;
 		}
-
 		}
 	}
 }
@@ -67,10 +68,10 @@ int main()
 	int size, step;
 	setlocale(LC_CTYPE, "Russian");
 	srand(time(NULL));
-	enum Table { Scantab = 1, SortTab, ArrayHash, ListHash, AvlTree };
+	enum Table { Scantab = 1, SortTab, ArrayHash, ListHash, Tree, AvlTree};
 	while (a != 0)
 	{
-		cout << "¬ыберите тип таблицы:\n 1-неупор€доченна€\n 2-упор€доченна€\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-ј¬Ћ дерево\n 0-выход\n";
+		cout << "¬ыберите тип таблицы:\n 1-неупор€доченна€\n 2-упор€доченна€\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-ј¬Ћ дерево\n 0-выход\n";
 		cin >> a;
 		switch (a)
 		{
@@ -109,7 +110,7 @@ int main()
 			cout << t;
 			TSortTable sort(size);
 			sort.ScanToSort(t);
-			actions(t);
+			actions(sort);
 			break;
 		}
 		case (ArrayHash):
@@ -149,6 +150,23 @@ int main()
 			actions(t);
 			break;
 		}
+		case (Tree):
+		{
+			cout << "¬ведите количество записей\n";
+			cin >> size;
+			TTreeTable t;
+			TRecord rec;
+			for (int i = 0; i < size; ++i) {
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
+			}
+			cout << t;
+			cout << "Ёффективность: " << t.getEff() << endl << endl;
+			actions(t);
+			break;
+		}
 		case (AvlTree):
 		{
 			cout << "¬ведите количество записей\n";
@@ -161,7 +179,7 @@ int main()
 				rec.val = to_string(r) + "**";
 				t.Insert(rec);
 			}
-			t.PrintTable(t.getRoot());
+			cout << t;
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			actions(t);
 			break;

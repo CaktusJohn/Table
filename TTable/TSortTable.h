@@ -59,9 +59,9 @@ public:
 	void merge_sort(int left, int right);
 	void sort_select(int size);
 	bool Find(Tkey key);
-	void InsRec(TRecord rec)
+	bool Insert(TRecord rec)
 	{
-		eff = 0;
+		
 		if (Full())
 		{
 			throw("error");
@@ -80,22 +80,26 @@ public:
 				}
 				pRecs[CurrPos] = rec;
 				DataCount++;
+				return true;
 			}
 		}
+		return false;
 	}
-	void DelRec(Tkey key)
+	bool Delete(Tkey key)
 	{
-		eff = 0;
+		
 		bool res = Find(key);
 		if (res)
 		{
-			for (int i = CurrPos; i < DataCount; i++)
+			for (int i = CurrPos; i < DataCount-1; i++)
 			{
 				eff++;
 				pRecs[i] = pRecs[i+1];
 			}
 			DataCount--;
+			return true;
 		}
+		return false;
 	}
 	friend ostream& operator<<(ostream& os, TSortTable t);
 };

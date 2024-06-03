@@ -17,10 +17,10 @@ TEST(TArrayHashTable, eff_is_correct)
     rec2.val = "dwg";
     rec2.key = 18;
     int eff1, eff2;
-    t.InsRec(rec1);
+    t.Insert(rec1);
     eff1 = t.getEff();
     t.SetZeroEff();
-    t.InsRec(rec2);
+    t.Insert(rec2);
     eff2 = t.getEff();
     EXPECT_TRUE(eff1 < eff2);
 }

@@ -95,6 +95,7 @@ public:
 	{
 		if (Find(_rec.key))
 		{
+			cout << "Такой элемент уже есть\n";
 			return false;
 		}
 		else
@@ -250,23 +251,6 @@ public:
 		DataCount = 0;
 	}
 
-	void PrintTable(std::ostream& os, TTreeNode* pNode)
-	{
-		if (pNode != nullptr)
-		{
-			for (int i = 0; i < lvl; i++)
-			{
-				os << " ";
-			}
-			os << pNode->rec.key << std::endl;
-			lvl++;
-			PrintTable(os, pNode->pRight);
-			PrintTable(os, pNode->pLeft);
-			lvl--;
-
-		}
-	}
-
 	bool Full() { return false; };
 	TRecord getRecord() { return pCurr->rec; };
 	void SetCurrentRecord(TRecord record)
@@ -303,6 +287,28 @@ public:
 	Tkey GetRooTkey()
 	{
 		return pRoot->rec.key;
+	}
+
+	ostream& PrintTable(ostream& os, TTreeNode* pNode){
+		if (pNode != nullptr)
+		{
+			for (int i = 0; i < lvl; i++)
+			{
+				os << " ";
+			}
+			os << pNode->rec.key << std::endl;
+			lvl++;
+			PrintTable(os, pNode->pRight);
+			PrintTable(os, pNode->pLeft);
+			lvl--;
+		}
+		return os;
+	}
+
+	friend ostream& operator <<(ostream& os, TTreeTable& t) {
+		TTreeNode* pNode = t.getRoot();
+		t.PrintTable(os, pNode);
+		return os;
 	}
 };
 

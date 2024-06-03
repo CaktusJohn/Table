@@ -245,6 +245,7 @@ public:
 		bool res = Find(rec.key);
 		if (res == true)
 		{
+			cout << "Такой элемент уже есть\n";
 			return false;
 		}
 		else {
@@ -262,21 +263,6 @@ public:
 		{
 			DeleteRec(pRoot, key);
 			return  true;
-
-		}
-	}
-	void PrintTable(TTreeNode* pNode) {
-		if (pNode != nullptr)
-		{
-			for (int i = 0; i < lvl; i++)
-			{
-				cout << " ";
-			}
-			cout << pNode->rec.key << std::endl;
-			lvl++;
-			PrintTable(pNode->pRight);
-			PrintTable(pNode->pLeft);
-			lvl--;
 
 		}
 	}
