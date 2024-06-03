@@ -2,14 +2,17 @@
 #include"TScanTable.h"
 #include"TSortTable.h"
 #include"THashTable.h"
+#include "TListHash.h"
+#include "TAVLTree.h"
 #include<locale.h>
 #include<random>
 #include<ctime>
 #include<string>
+
 template <class T>
 void actions(T t)
 {
-	int b=30;
+	int b = -1;
 	while (b != 0)
 	{
 		cout << "1-поиск элемента\n2-добавление элемента\n3-удаление элемента\n0-выход\n";
@@ -39,7 +42,7 @@ void actions(T t)
 			TRecord rec;
 			rec.key = el;
 			rec.val = to_string(el) + "**";
-			t.InsRec(rec);
+			t.Insert(rec);
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			break;
 		}
@@ -49,7 +52,7 @@ void actions(T t)
 			int el;
 			cout << "¬ведите элемент\n";
 			cin >> el;
-			t.DelRec(el);
+			t.Delete(el);
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			break;
 		}
@@ -60,14 +63,14 @@ void actions(T t)
 
 int main()
 {
-	int a = 30, b = 30; int size, step;
+	int a = -1;
+	int size, step;
 	setlocale(LC_CTYPE, "Russian");
-	mt19937 gen(static_cast<unsigned int>(time(nullptr)));
-	uniform_int_distribution<> distrib(1, 1000);
-	enum Table { Scantab = 1, SortTab, ArrayHash, ListHash, RBTree, AvlTree };
+	srand(time(NULL));
+	enum Table { Scantab = 1, SortTab, ArrayHash, ListHash, AvlTree };
 	while (a != 0)
 	{
-		cout << "¬ыберите тип таблицы:\n 1-неупор€доченна€\n 2-упор€доченна€\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-дерево\n 6-ј¬Ћ дерево\n 0-выход\n";
+		cout << "¬ыберите тип таблицы:\n 1-неупор€доченна€\n 2-упор€доченна€\n 3-хеш таблица(массив)\n 4-хеш таблица(список)\n 5-ј¬Ћ дерево\n 0-выход\n";
 		cin >> a;
 		switch (a)
 		{
@@ -79,10 +82,10 @@ int main()
 			TRecord rec;
 			while (!t.Full())
 			{
-				int rand = distrib(gen);
-				rec.key = rand;
-				rec.val = to_string(rand) + "**";
-				t.InsRec(rec);
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
 			}
 			cout << t;
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
@@ -98,17 +101,16 @@ int main()
 			TRecord rec;
 			while (!t.Full())
 			{
-				int rand = distrib(gen);
-				rec.key = rand;
-				rec.val = to_string(rand) + "**";
-				t.InsRec(rec);
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
 			}
 			cout << t;
 			TSortTable sort(size);
 			sort.ScanToSort(t);
 			actions(t);
-		
-		break;		
+			break;
 		}
 		case (ArrayHash):
 		{
@@ -120,12 +122,46 @@ int main()
 			TRecord rec;
 			while (!t.Full())
 			{
-				int rand = distrib(gen);
-				rec.key = rand;
-				rec.val = to_string(rand) + "**";
-				t.InsRec(rec);
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
 			}
 			cout << t;
+			cout << "Ёффективность: " << t.getEff() << endl << endl;
+			actions(t);
+			break;
+		}
+		case (ListHash):
+		{
+			cout << "¬ведите количество записей\n";
+			cin >> size;
+			TListHash t(size);
+			TRecord rec;
+			while (!t.Full()) {
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
+			}
+			cout << t;
+			cout << "Ёффективность: " << t.getEff() << endl << endl;
+			actions(t);
+			break;
+		}
+		case (AvlTree):
+		{
+			cout << "¬ведите количество записей\n";
+			cin >> size;
+			AVLTree t;
+			TRecord rec;
+			for (int i = 0; i < size; ++i) {
+				int r = rand() % 1001;
+				rec.key = r;
+				rec.val = to_string(r) + "**";
+				t.Insert(rec);
+			}
+			t.PrintTable(t.getRoot());
 			cout << "Ёффективность: " << t.getEff() << endl << endl;
 			actions(t);
 			break;

@@ -24,7 +24,7 @@ TEST(TScanTable, can_insert)
     TRecord a;
     a.key = 1;
     a.val = str;
-    ASSERT_NO_THROW(table.InsRec(a));
+    ASSERT_NO_THROW(table.Insert(a));
     table.Find(1);
     EXPECT_TRUE(a == table.getRecord());
 }
@@ -40,9 +40,9 @@ TEST(TScanTable, cant_insert_new_Record_in_Full_TScanTable)
         int rand = distrib(gen);
         rec.key = rand;
         rec.val = to_string(rand) + "**";
-        t.InsRec(rec);
+        t.Insert(rec);
     }
-    ASSERT_ANY_THROW(t.InsRec(rec));
+    ASSERT_ANY_THROW(t.Insert(rec));
     
 }
 

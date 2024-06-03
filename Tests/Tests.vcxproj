@@ -131,6 +131,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="gtest-all.cc" />
+    <ClCompile Include="test_TAVLTree.cpp" />
+    <ClCompile Include="test_TListHash.cpp" />
     <ClCompile Include="test_TsortTable.cpp" />
     <ClCompile Include="test_TArrayHashTable.cpp" />
     <ClCompile Include="test_main.cpp" />
