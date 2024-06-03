@@ -7,7 +7,23 @@ TEST(TArrayHashTable, can_create_Table)
 {
     ASSERT_NO_THROW(TArrayHashTable table(10,4));
 }
-
+TEST(TArrayHashTable, eff_is_correct)
+{
+    TArrayHashTable t(10, 2);
+    TRecord rec1;
+    rec1.key = 8;
+    rec1.val = "dsf";
+    TRecord rec2;
+    rec2.val = "dwg";
+    rec2.key = 18;
+    int eff1, eff2;
+    t.InsRec(rec1);
+    eff1 = t.getEff();
+    t.SetZeroEff();
+    t.InsRec(rec2);
+    eff2 = t.getEff();
+    EXPECT_TRUE(eff1 < eff2);
+}
 
 TEST(TArrayHashTable, can_insert)
 {
